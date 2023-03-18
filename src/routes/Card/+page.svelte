@@ -1,35 +1,56 @@
+<script>
+  let cardNumber = '0000 0000 0000 0000';
+  let name = 'Kuuku Pööpö'
+  let expMonth = '10';
+  let expYear = '23';
+  let cvc = '000';
+</script>
 <main>
   <div class="grid">
     <section class="cards">
       <div class="card front"> 
-        
+        <div class="card-front-data">
+          <div class="balls">
+            <span class="circle-filled" />
+            <span class="circle" />
+          </div>
+            <p class="number">{cardNumber}</p>
+            <div class="name-exp">
+              <p class="name">{name}</p>
+              <p class="exp">
+                {`${expMonth}/${expYear}`}
+              </p>
+            </div>
+        </div>
       </div>
       <div class="right">
         <div class="card back right">
-          
+          <div class="card-back-data">
+            <p>{cvc}</p>
+          </div>
         </div>
       </div>
     </section>
     <section class="form">
         <label for="cardholderName">
           CARDHOLDER NAME
-          <input type="text" name="cardholderName" placeholder="e.g. Samu Sammakko">
+          <input type="text" name="cardholderName" placeholder="e.g. Kuuku Pööpö" bind:value={name}>
         </label>
         <label for="cardNumber">
           CARD NUMBER
-          <input type="text" name="cardNumber" placeholder="e.g. 1234 0000 0000 0000">
+          <input type="text" name="cardNumber" placeholder="e.g. 1234 0000 0000 0000" bind:value={cardNumber}>
         </label>
         <div class="exp-cvc">
           <label for="exp-dates" class="exp">
             EXP.DATE (MM/YY)
             <div class="exp-dates">
-              <input type="text" placeholder="MM" name="expMM" class="input-small">
-              <input type="text" placeholder="YY" name="expYY" class="input-small">
+              <input type="text" placeholder="MM" name="expMM" class="input-small" bind:value={expMonth}>
+              <input type="text" placeholder="YY" name="expYY" class="input-small" bind:value={expYear}>
             </div>
           </label>
           <label for="cvc">
             CVC
-            <input type="text" name="cvc" placeholder="e.g. 123">
+            <input type="text" name="cvc" placeholder="e.g. 123" bind:value={cvc}>
           </label>
         </div>
         <button type="submit">Confirm</button>
@@ -52,7 +73,9 @@
     background: linear-gradient(0deg, var(--white) 66%, var(--very-dark-violet) 33% );
     font-size: 18px;
     height: 100%;
+    color: var(--white);
     font-family: 'Space Grotesk';
+    font-weight: 500;
   }
   
   .grid {
@@ -141,12 +164,65 @@
 
   .card.front {
     background-image: url('/bg-card-front.png');
+    display: grid;
+    place-items: center;
   }
   .right {
     float: right;
   }
   .card.back {
     background-image: url('/bg-card-back.png');
+  }
+
+  .card-back-data {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .card-front-data {
+    height: 90%;
+    width: 85%;
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+  }
+
+  .circle-filled {
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    background-color: var(--white);
+    display: inline-block;
+  }
+
+  .circle {
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    border: 1px solid white;
+    display: inline-block;
+  }
+
+  .balls {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+  }
+
+  .name-exp {
+    display: flex;
+    justify-content: space-between;
+    font-size: small;
+    align-items: end;
+  }
+
+  .number {
+    font-size: xx-large;
+    display: flex;
+    margin: 0;
+    align-items: end;
   }
 
 </style>
