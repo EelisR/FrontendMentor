@@ -1,9 +1,16 @@
-<script>
-  let cardNumber = '0000 0000 0000 0000';
-  let name = 'Kuuku Pööpö'
-  let expMonth = '10';
-  let expYear = '23';
-  let cvc = '000';
+<script lang="ts">
+  let cardNumber = '';
+  const cardNumberPlaceholder = '1234 0000 0000 0000';
+  let name = ''
+  const namePlaceholder = 'Samu Sammakko';
+  let expMonth = '';
+  const expMonthPlaceholder = '10';
+  let expYear = '';
+  const expYearPlaceholder = '23';
+  let cvc = '';
+  const cvcPlaceholder = '000';
+
+  const lengthCheck = (value: String, placeholder: String) => value.length === 0 ? placeholder : value;
 </script>
 <main>
   <div class="grid">
@@ -14,11 +21,11 @@
             <span class="circle-filled" />
             <span class="circle" />
           </div>
-            <p class="number">{cardNumber}</p>
+            <p class="number">{lengthCheck(cardNumber, cardNumberPlaceholder)}</p>
             <div class="name-exp">
-              <p class="name">{name}</p>
+              <p class="name">{lengthCheck(name, namePlaceholder)}</p>
               <p class="exp">
-                {`${expMonth}/${expYear}`}
+                {`${lengthCheck(expMonth, expMonthPlaceholder)}/${lengthCheck(expYear, expYearPlaceholder)}`}
               </p>
             </div>
         </div>
@@ -26,7 +33,7 @@
       <div class="right">
         <div class="card back right">
           <div class="card-back-data">
-            <p>{cvc}</p>
+            <p>{lengthCheck(cvc, cvcPlaceholder)}</p>
           </div>
         </div>
       </div>
@@ -34,23 +41,23 @@
     <section class="form">
         <label for="cardholderName">
           CARDHOLDER NAME
-          <input type="text" name="cardholderName" placeholder="e.g. Kuuku Pööpö" bind:value={name}>
+          <input type="text" name="cardholderName" placeholder={namePlaceholder} bind:value={name}>
         </label>
         <label for="cardNumber">
           CARD NUMBER
-          <input type="text" name="cardNumber" placeholder="e.g. 1234 0000 0000 0000" bind:value={cardNumber}>
+          <input type="text" name="cardNumber" placeholder={cardNumberPlaceholder} bind:value={cardNumber}>
         </label>
         <div class="exp-cvc">
           <label for="exp-dates" class="exp">
             EXP.DATE (MM/YY)
             <div class="exp-dates">
-              <input type="text" placeholder="MM" name="expMM" class="input-small" bind:value={expMonth}>
-              <input type="text" placeholder="YY" name="expYY" class="input-small" bind:value={expYear}>
+              <input type="text" placeholder={expMonthPlaceholder} name="expMM" class="input-small" bind:value={expMonth}>
+              <input type="text" placeholder={expYearPlaceholder} name="expYY" class="input-small" bind:value={expYear}>
             </div>
           </label>
           <label for="cvc">
             CVC
-            <input type="text" name="cvc" placeholder="e.g. 123" bind:value={cvc}>
+            <input type="text" name="cvc" placeholder={cvcPlaceholder} bind:value={cvc}>
           </label>
         </div>
         <button type="submit">Confirm</button>
@@ -140,6 +147,10 @@
     padding: 0 1em;
     font-family: 'Space Grotesk';
     border: 1px solid var(--light-grayish-violet);
+    color: var(--dark-grayish-violet);
+  }
+
+  input::placeholder {
     color: var(--light-grayish-violet);
   }
 
